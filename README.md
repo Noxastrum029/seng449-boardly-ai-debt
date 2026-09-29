@@ -1,25 +1,29 @@
-﻿# SENG 449 – Boardly: Technical Debt in AI-Generated Code
+﻿# SENG 449 – Boardly: Cleaning Up AI-Generated Code Safely
 
 Engineering Design II · Project 02 – Refactoring AI-Generated Code
 Team: Berat Yılmaz (PM), Hüseyin Emir Macit
 
 ## Goal
-Generate the same full-stack app (Boardly, a simple Trello-like task manager) from one spec using two models in Cursor (Claude and GPT), measure the technical debt, then refactor the backend while preserving behavior and compare before/after.
+Generate the same full-stack app (Boardly) from one spec with two models in Cursor (Claude, GPT), measure its technical debt, and compare three refactoring strategies at equal effort: Manual, Unguided LLM, Guided LLM (test + metric feedback).
 
-## Stack
-TypeScript · Node.js/Express · Prisma/PostgreSQL · React · JWT
+## Research Questions
+- RQ1: What technical-debt profile do the two AI-generated codebases carry?
+- RQ2: How well does each strategy preserve behavior?
+- RQ3: How do the strategies differ in maintainability gain and effort?
+
+## Stack and Tools
+TypeScript · Express · Prisma/PostgreSQL · React · Jest · Supertest · StrykerJS · SonarCloud · ESLint · jscpd · dependency-cruiser · autocannon
 
 ## Repository Structure
-- `docs/spec.md` – single specification given to both models
-- `docs/prompts/` – prompt log per model (reproducibility)
+- `docs/spec.md` – single specification
+- `docs/prompts/` – prompt logs per model
 - `docs/reports/` – technical reports
-- `apps/claude-baseline`, `apps/gpt-baseline` – AI-generated code (untouched, tagged `v0-ai-baseline-*`)
-- `analysis/before`, `analysis/after` – metric outputs (SonarQube, ESLint, jscpd, dependency-cruiser, coverage)
+- `apps/claude-baseline`, `apps/gpt-baseline` – untouched AI output (tags `v0-ai-baseline-*`)
+- `tests/acceptance/` – team-written acceptance tests (behavior reference)
+- `analysis/before`, `analysis/after` – metric outputs
 
-## Workflow
-- `[ai-gen]` commits: AI output only, no manual edits
-- `[refactor]` commits: human refactoring on separate branches, merged via PR
-- Behavior locked with tests before any refactoring
+## Conventions
+`[ai-gen]` commits = AI output only · `[refactor]` commits = one refactoring step each, via PR
 
 ## Out of Scope
-Vulnerability hunting, building a new review tool, frontend refactoring, energy measurement.
+Vulnerability hunting (P04), attack graphs (P03), new review tool (P06), frontend refactoring, energy measurement.
